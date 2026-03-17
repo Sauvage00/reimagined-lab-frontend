@@ -1,0 +1,393 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0208 0%, #4a0a18 35%, #8b1030 65%, #2d0510 100%);
+  color: white;
+  padding: 3rem 4rem;
+}
+.container { max-width: 960px; margin: 0 auto; }
+
+.logo { font-size: 22px; font-weight: 900; margin-bottom: 4rem; letter-spacing: -0.5px; }
+.logo-re { color: white; }
+.logo-lab { color: #ff6b8a; }
+
+.greeting { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4rem; }
+.greeting h1 { font-size: 52px; font-weight: 900; letter-spacing: -2px; color: white; }
+.greeting-input {
+  font-size: 52px; font-weight: 900; letter-spacing: -2px;
+  color: #ff9db5; border: none;
+  border-bottom: 3px solid #ff6b8a;
+  background: transparent; font-family: inherit; outline: none;
+  width: 320px; padding: 0 0 2px 0;
+}
+.greeting-input::placeholder { color: rgba(255,180,180,0.4); font-weight: 900; }
+
+.glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 22px;
+  padding: 2rem 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.field-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(255,255,255,0.45); display: block; margin-bottom: 0.7rem; }
+.form-input {
+  width: 100%; padding: 13px 16px; font-size: 15px;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px; font-family: inherit; color: white; outline: none;
+  transition: border-color 0.2s;
+}
+.form-input::placeholder { color: rgba(255,255,255,0.3); }
+.form-input:focus { border-color: #ff6b8a; background: rgba(255,255,255,0.14); }
+select.form-input option { background: #4a0a18; color: white; }
+textarea.form-input { min-height: 100px; resize: vertical; }
+
+.type-section { margin-bottom: 2.5rem; }
+.type-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem; }
+.type-btn {
+  padding: 12px 28px; font-size: 14px; font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  background: rgba(255,255,255,0.07);
+  cursor: pointer; font-family: inherit;
+  color: rgba(255,255,255,0.45);
+  transition: none;
+}
+.type-btn.active {
+  border-color: #ff6b8a;
+  color: white;
+  background: rgba(255,107,138,0.18);
+}
+
+.section-pill {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px; padding: 5px 16px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.7); margin-bottom: 1.2rem;
+}
+.section-heading { font-size: 30px; font-weight: 900; letter-spacing: -1px; color: white; margin-bottom: 1.8rem; }
+
+.conditional-section { display: none; }
+.conditional-section.active { display: block; }
+
+.form-group { margin-bottom: 1.6rem; }
+.form-group:last-child { margin-bottom: 0; }
+.form-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-pair .form-group { margin-bottom: 0; }
+.req { color: #ff6b8a; }
+
+.review-box {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+}
+.review-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; }
+.review-items { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.review-item p { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem; }
+.review-item h4 { font-size: 18px; font-weight: 700; color: white; }
+
+.checkbox-group { display: flex; flex-direction: column; gap: 1.2rem; margin: 1.5rem 0; }
+.checkbox-group label { display: flex; align-items: center; font-size: 15px; font-weight: 500; cursor: pointer; color: rgba(255,255,255,0.8); }
+.checkbox-group input[type="checkbox"] { width: 18px; height: 18px; margin-right: 12px; accent-color: #ff6b8a; }
+
+.submit-btn {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  width: 100%;
+  background: white;
+  color: #1a0208;
+  border: none; border-radius: 50px;
+  padding: 20px 40px;
+  font-size: 17px; font-weight: 800;
+  cursor: pointer; font-family: inherit; margin-top: 2rem;
+}
+.submit-btn .arrow-circle {
+  width: 36px; height: 36px;
+  background: #8b1030;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: white; flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  body { padding: 2rem 1.5rem; }
+  .form-pair { grid-template-columns: 1fr; }
+  .review-items { grid-template-columns: 1fr; }
+  .type-buttons { flex-direction: column; }
+  .greeting h1, .greeting-input { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="logo"><span class="logo-re">reimagined</span><span class="logo-lab">lab</span></div>
+
+  <div class="greeting">
+    <h1>Hello,</h1>
+    <input class="greeting-input" type="text" id="clientName" placeholder="your name">
+  </div>
+
+  <div class="glass">
+    <label class="field-label">Email address <span class="req">*</span></label>
+    <input class="form-input" type="email" placeholder="you@example.com" required>
+  </div>
+
+  <div class="type-section">
+    <label class="field-label">What are you creating?</label>
+    <div class="type-buttons">
+      <button type="button" class="type-btn active" data-type="ai">AI Video</button>
+      <button type="button" class="type-btn" data-type="nonai">Standard Edit</button>
+      <button type="button" class="type-btn" data-type="both">Both</button>
+    </div>
+  </div>
+
+  <!-- AI SECTION -->
+  <div id="aiSection" class="conditional-section active">
+    <div class="section-pill">AI Video</div>
+    <div class="section-heading">AI Video Brief</div>
+
+    <div class="glass">
+      <div class="form-pair">
+        <div class="form-group">
+          <label class="field-label">Brand name <span class="req">*</span></label>
+          <input class="form-input" type="text" placeholder="Your brand">
+        </div>
+        <div class="form-group">
+          <label class="field-label">What are you promoting? <span class="req">*</span></label>
+          <input class="form-input" type="text" placeholder="Product or service">
+        </div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <label class="field-label">Key benefits</label>
+      <textarea class="form-input" placeholder="What makes it special?"></textarea>
+    </div>
+
+    <div class="glass">
+      <div class="form-pair">
+        <div class="form-group">
+          <label class="field-label">Vibe or tone</label>
+          <select class="form-input">
+            <option value="">Pick a vibe</option>
+            <option>Professional & credible</option>
+            <option>Casual & friendly</option>
+            <option>Energetic & bold</option>
+            <option>Luxury & premium</option>
+            <option>Playful & fun</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">Target audience</label>
+          <input class="form-input" type="text" placeholder="Young professionals, parents...">
+        </div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <label class="field-label">Main message or CTA <span class="req">*</span></label>
+      <textarea class="form-input" placeholder="What do you want viewers to feel or do?"></textarea>
+    </div>
+
+    <div class="glass">
+      <div class="form-pair">
+        <div class="form-group">
+          <label class="field-label">Video length</label>
+          <select class="form-input">
+            <option value="">Pick a length</option>
+            <option>Short (15-30 seconds)</option>
+            <option>Medium (30-60 seconds)</option>
+            <option>Long (1-3 minutes)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">Voice over?</label>
+          <select class="form-input">
+            <option value="">Select</option>
+            <option>Yes, with voice</option>
+            <option>No, music & text only</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <label class="field-label">Visual style</label>
+      <textarea class="form-input" placeholder="Minimalist, cinematic, bold, dark..."></textarea>
+    </div>
+
+    <div class="glass">
+      <div class="form-pair">
+        <div class="form-group">
+          <label class="field-label">Music vibe</label>
+          <input class="form-input" type="text" placeholder="Upbeat, cinematic, chill...">
+        </div>
+        <div class="form-group">
+          <label class="field-label">Project type <span class="req">*</span></label>
+          <select class="form-input" id="aiType" onchange="updateReview()">
+            <option value="">Select type</option>
+            <option value="short">AI Short Video</option>
+            <option value="youtube">AI YouTube Video</option>
+            <option value="carousel6">AI Carousels — 6</option>
+            <option value="carousel12">AI Carousels — 12</option>
+            <option value="videocarousel6">Video Carousels — 6</option>
+            <option value="videocarousel12">Video Carousels — 12</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <label class="field-label">Specific scenes or shots</label>
+      <textarea class="form-input" placeholder="Any shots or angles?"></textarea>
+    </div>
+
+    <div class="glass">
+      <label class="field-label">What to avoid</label>
+      <textarea class="form-input" placeholder="Colors, styles, themes you don't want"></textarea>
+    </div>
+  </div>
+
+  <!-- STANDARD SECTION -->
+  <div id="nonaSection" class="conditional-section">
+    <div class="section-pill">Standard Edit</div>
+    <div class="section-heading">Standard Video Brief</div>
+
+    <div class="glass">
+      <label class="field-label">Project title <span class="req">*</span></label>
+      <input class="form-input" type="text" placeholder="e.g., Product Launch Video">
+    </div>
+
+    <div class="glass">
+      <label class="field-label">What is this about? <span class="req">*</span></label>
+      <textarea class="form-input" placeholder="Brief description..."></textarea>
+    </div>
+
+    <div class="glass">
+      <div class="form-pair">
+        <div class="form-group">
+          <label class="field-label">Video type <span class="req">*</span></label>
+          <select class="form-input" id="videoType" onchange="updateReview()">
+            <option value="">Select type</option>
+            <option value="social">Social media clip</option>
+            <option value="youtube">YouTube video</option>
+            <option value="commercial">Commercial or ad</option>
+            <option value="documentary">Documentary</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">Footage situation</label>
+          <select class="form-input">
+            <option value="">Select</option>
+            <option>I'm providing all footage</option>
+            <option>Partial, need B-roll</option>
+            <option>You source everything</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <div class="form-pair">
+        <div class="form-group">
+          <label class="field-label">Tone & style</label>
+          <select class="form-input">
+            <option value="">Select</option>
+            <option>Professional</option>
+            <option>Casual & fun</option>
+            <option>Cinematic</option>
+            <option>Energetic</option>
+            <option>Educational</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="field-label">Music preference</label>
+          <input class="form-input" type="text" placeholder="Upbeat, cinematic...">
+        </div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <div class="form-group">
+        <label class="field-label">Revision rounds</label>
+        <select class="form-input">
+          <option value="">Select</option>
+          <option>1 round</option>
+          <option>2 rounds</option>
+          <option>3+ rounds</option>
+        </select>
+      </div>
+      <div class="checkbox-group">
+        <label><input type="checkbox"> Color grading</label>
+        <label><input type="checkbox"> Special effects</label>
+        <label><input type="checkbox"> Subtitles / captions</label>
+      </div>
+    </div>
+
+    <div class="glass">
+      <label class="field-label">Anything else?</label>
+      <textarea class="form-input" placeholder="Budget, timeline, special requests..."></textarea>
+    </div>
+  </div>
+
+  <div id="reviewBox" style="display:none;">
+    <div class="review-box">
+      <div class="review-title">Project Summary</div>
+      <div class="review-items">
+        <div class="review-item"><p>Project type</p><h4 id="reviewType">—</h4></div>
+        <div class="review-item"><p>Turnaround time</p><h4 id="reviewTurnaround">—</h4></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="submit-btn" onclick="event.preventDefault(); alert('Brief submitted! We\'ll be in touch within 24 hours.');">
+    Send Brief to Confirm
+    <div class="arrow-circle">→</div>
+  </button>
+
+</div>
+<script>
+document.querySelectorAll('.type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const t = btn.dataset.type;
+    const ai = document.getElementById('aiSection');
+    const nona = document.getElementById('nonaSection');
+    if (t === 'ai') { ai.classList.add('active'); nona.classList.remove('active'); }
+    else if (t === 'nonai') { nona.classList.add('active'); ai.classList.remove('active'); }
+    else { ai.classList.add('active'); nona.classList.add('active'); }
+    updateReview();
+  });
+});
+
+function updateReview() {
+  const aiMap = { short:'1 day', youtube:'3–5 days', carousel6:'1 day', carousel12:'2 days', videocarousel6:'2 days', videocarousel12:'3 days' };
+  const nonaMap = { social:'3 days', youtube:'5 days', commercial:'10 days', documentary:'2–3 weeks' };
+  const aiEl = document.getElementById('aiType');
+  const nonaEl = document.getElementById('videoType');
+  let show = false, typeText = '', taText = '';
+  if (aiEl && aiEl.value) { typeText = aiEl.options[aiEl.selectedIndex].text; taText = aiMap[aiEl.value]; show = true; }
+  if (nonaEl && nonaEl.value) { typeText = nonaEl.options[nonaEl.selectedIndex].text; taText = nonaMap[nonaEl.value]; show = true; }
+  const rb = document.getElementById('reviewBox');
+  if (show) { document.getElementById('reviewType').textContent = typeText; document.getElementById('reviewTurnaround').textContent = taText; rb.style.display = 'block'; }
+  else { rb.style.display = 'none'; }
+}
+</script>
+</body>
+</html>
